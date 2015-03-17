@@ -1,0 +1,100 @@
+@import "sprites";
+.logo {
+  @extend .sprite_logo;
+}
+.logo-compact {
+  @extend .sprite_logo-compact;
+}
+.facebook-header {
+  @extend .sprite_facebook;
+  &:hover {
+    @extend .sprite_facebook-hover;
+  }
+}
+a:hover .facebook-header {
+  @extend .sprite_facebook-hover;
+}
+.gplus-header {
+  @extend .sprite_googleplus;
+  &:hover {
+    @extend .sprite_googleplus-hover;
+  }
+}
+a:hover .gplus-header {
+  @extend .sprite_googleplus-hover;
+}
+.twitter-header {
+  @extend .sprite_twitter;
+  &:hover {
+    @extend .sprite_twitter-hover;
+  }
+}
+a:hover .twitter-header {
+  @extend .sprite_twitter-hover;
+}
+.menu-seperator {
+  @extend .sprite_menu-seperator;
+}
+
+.hr {
+  @extend .sprite_decorative;
+}
+.clock-icon {
+  @extend .sprite_clock-icon;
+}
+.people-icon {
+  @extend .sprite_people-icon;
+}
+.pin-icon {
+  @extend .sprite_pin-icon;
+}
+.next-icon {
+  margin-bottom: -1px;
+  @extend .sprite_next-arrow;
+  &:hover {
+    @extend .sprite_next-arrow-hover;
+  }
+}
+a > .next-icon:hover {
+  @extend .sprite_next-arrow-hover;
+}
+.previous-icon {
+  margin-bottom: -1px;
+  @extend .sprite_previous-arrow;
+  &:hover {
+    @extend .sprite_previous-arrow-hover;
+  }
+}
+a > .previous-icon:hover {
+  @extend .sprite_previous-arrow-hover;
+}
+.share-icon {
+  margin-bottom: -4px;
+  margin-left: 5px;
+  @extend .sprite_share;
+  &:hover {
+    @extend .sprite_share-hover;
+  }
+}
+a:hover .share-icon, a:focus .share-icon {
+  @extend .sprite_share-hover;
+}
+
+.back-to-collection {
+  @extend .sprite_back-to-collection;
+  margin-bottom: -11px;
+  margin-right: 4px;
+  margin-left: 6px;
+  &:hover {
+    @extend .sprite_back-to-collection-hover;
+  }
+}
+a:hover .back-to-collection, a:focus .back-to-collection {
+  @extend .sprite_back-to-collection-hover;
+}
+.pin-icon {
+  @extend .sprite_pin-icon;
+}
+.clock-icon {
+  @extend .sprite_clock-icon;
+}
