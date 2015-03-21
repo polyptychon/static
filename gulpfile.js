@@ -222,22 +222,5 @@ gulp.task('production', function() {
   env = PRODUCTION;
   runSequence(['images','clean-js'],['fonts','coffee','sass'],['jade']);
 });
-gulp.task('wordpress', function() {
-  env = PRODUCTION;
-  runSequence(['coffee','sass'],['copy_styles','copy_scripts']);
-});
-gulp.task('copy_scripts', function() {
-  return gulp.src([getOutputDir()+ASSETS+'/js/**'])
-    .pipe(gulp.dest('../wordpress/wp-content/themes/moveart/assets/js'));
-});
-gulp.task('copy_styles', function() {
-  return gulp.src([getOutputDir()+ASSETS+'/css/**'])
-    .pipe(gulp.dest('../wordpress/wp-content/themes/moveart/assets/css'));
-});
 
-//NODE_ENV=production gulp -> all
-//NODE_ENV=production gulp sass -> runs only sass
-//NODE_ENV=production gulp wordpress -> copy production files to wordpress
-//NODE_ENV=production gulp sass && NODE_ENV=production gulp copy_styles -> runs only sass
-//NODE_ENV=production gulp coffee && NODE_ENV=production gulp copy_scripts -> runs only sass
 //gulp watch --jade=filename
