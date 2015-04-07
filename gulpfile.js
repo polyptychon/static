@@ -163,6 +163,28 @@ gulp.task('sass', function() {
     .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, rev.manifest()))
     .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, gulp.dest(BUILD+'/rev/css')))
 });
+gulp.task('editorSass', function() {
+  var imagesManifest = env === PRODUCTION && USE_FINGERPRINTING ? (JSON.parse(fs.readFileSync("./"+BUILD+'/rev/images/rev-manifest.json', "utf8"))) : {};
+  var config = { errLogToConsole: true };
+
+  if (env === DEVELOPMENT) {
+    config.sourceComments = 'map';
+  } else if (env === PRODUCTION) {
+    config.outputStyle = 'compressed';
+  }
+  return gulp.src(SRC+'/sass/editor.scss')
+    .pipe(duration('sass'))
+    .pipe(plumber())
+    .pipe(sass(config).on('error', gutil.log))
+    //.pipe(gulpif(env === PRODUCTION, prefix("last 2 versions", "> 1%", "ie 8", "ie 7", { cascade: true })))
+    .pipe(gulpif(env === PRODUCTION, minifyCSS()))
+    .pipe(gulpif(env === PRODUCTION, size()))
+    .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, fingerprint(imagesManifest, { base:'../images/', prefix: '../images/' })))
+    .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, rev()))
+    .pipe(gulp.dest(getOutputDir()+ASSETS+'/css'))
+    .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, rev.manifest()))
+    .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, gulp.dest(BUILD+'/rev/css')))
+});
 gulp.task('clean-css', function() {
   gulp.src(getOutputDir()+ASSETS+'/css', { read: false })
     .pipe(gulpif(env === PRODUCTION, clean()))
@@ -213,6 +235,7 @@ gulp.task('connect', function() {
 
 gulp.task('default', ['coffee', 'sass', 'jade']);
 gulp.task('live', ['coffee', 'jade', 'sass', 'watch']);
+gulp.task('editor', ['editorSass']);
 
 gulp.task('build', function() {
   runSequence(['fonts','images','spriteSass','autoVariables'],['fonts','coffee','sass'],['jade']);
