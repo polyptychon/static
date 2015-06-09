@@ -6,7 +6,6 @@ var gulp = require('gulp'),
 
     minifyCSS = require('gulp-minify-css'),
     glob = require('glob'),
-    imagemin = require('gulp-imagemin'),
     plumber = require('gulp-plumber'),
     browserify = require('browserify'),
     concat = require('gulp-concat'),
@@ -16,12 +15,14 @@ var gulp = require('gulp'),
     gutil = require('gulp-util'),
     flatten = require('gulp-flatten'),
     fingerprint = require('gulp-fingerprint'),
-    clean = require('gulp-clean'),
     buffer = require('gulp-buffer'),
     size = require('gulp-size'),
     fs = require('fs'),
     crypto = require('crypto'),
     _ = require('lodash'),
+
+    del = require('del'),
+    vinylPaths = require('vinyl-paths'),
 
     webserver = require('gulp-webserver'),
 
@@ -116,7 +117,7 @@ gulp.task('coffee', function() {
 
 gulp.task('clean-js', function() {
   gulp.src(getOutputDir()+ASSETS+'/js', { read: false })
-    .pipe(gulpif(env === PRODUCTION, clean()))
+    .pipe(gulpif(env === PRODUCTION, vinylPaths(del)))
 });
 gulp.task('vendor', function() {
   gulp.src(dependencies)
@@ -187,13 +188,10 @@ gulp.task('editorSass', function() {
 });
 gulp.task('clean-css', function() {
   gulp.src(getOutputDir()+ASSETS+'/css', { read: false })
-    .pipe(gulpif(env === PRODUCTION, clean()))
+    .pipe(gulpif(env === PRODUCTION, vinylPaths(del)))
 });
 gulp.task('images',['clean-images'], function() {
   return gulp.src([MOCKUPS+'/{images,sprite}/**/*.{jpg,png,gif}'])
-    .pipe(imagemin({
-      progressive: true
-    }))
     .pipe(duration('images'))
     .pipe(flatten())
     .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, rev()))
@@ -203,7 +201,7 @@ gulp.task('images',['clean-images'], function() {
 });
 gulp.task('clean-images', function() {
   gulp.src(getOutputDir()+ASSETS+'/images', { read: false })
-    .pipe(gulpif(env === PRODUCTION, clean()))
+    .pipe(gulpif(env === PRODUCTION, vinylPaths(del)))
 });
 gulp.task('fonts', function() {
   return gulp.src(['node_modules/bootstrap/assets/fonts/**', MOCKUPS+"/fonts/*"])
