@@ -1,27 +1,24 @@
 @import "sprites";
-.logo {
-  @extend .sprite_logo;
-}
 
-$social-icons: facebook twitter pinterst google-plus youtube vimeo;
+$hover-icons: facebook twitter pinterst google-plus youtube vimeo;
 
-@each $social-icon in $social-icons {
-  .#{$social-icon}-icon {
-    @extend .sprite_#{$social-icon};
+@each $hover-icon in $hover-icons {
+  .#{$hover-icon}-icon {
+    @extend .sprite_#{$hover-icon};
     &:hover {
-      @extend .sprite_#{$social-icon}-hover;
+      @extend .sprite_#{$hover-icon}-hover;
     }
   }
-  a:hover .#{$social-icon}-icon, a:focus .#{$social-icon}-icon {
-    @extend .sprite_#{$social-icon}-hover;
+  a:hover .#{$hover-icon}-icon, a:focus .#{$hover-icon}-icon {
+    @extend .sprite_#{$hover-icon}-hover;
   }
 }
 
-$contact-icons: address phone fax email;
+$simple-icons: address logo phone fax email;
 
-@each $contact-icon in $contact-icons {
-  .#{$contact-icon}-icon {
-    @extend .sprite_#{$contact-icon};
+@each $simple-icon in $simple-icons {
+  .#{$simple-icon}-icon {
+    @extend .sprite_#{$simple-icon};
     margin-bottom: -1px;
     margin-right: 5px;
   }

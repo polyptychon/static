@@ -77,7 +77,7 @@ header.navbar {
       position: absolute;
       z-index: 10000;
       &, &:hover {
-        @extend .logo;
+        @extend .logo-icon;
         @media (max-width: 375px) {
           width: 160px;
         }
