@@ -65,7 +65,7 @@ img {
   max-width: 100%;
   height: auto;
 }
-.content-html {
+.content-html, .mce-content-body {
   h1 {
     font-size: 26px;
     margin-bottom: .8em;
@@ -167,3 +167,23 @@ img {
 .uppercase {
   text-transform: uppercase;
 }
+
+
+@include make-grid(xs);
+
+@media (min-width: 480px) {
+  @include make-grid(xs-max);
+}
+
+@media (min-width: $screen-sm-min) {
+  @include make-grid(sm);
+}
+
+@media (min-width: $screen-md-min) {
+  @include make-grid(md);
+}
+
+@media (min-width: $screen-lg-min) {
+  @include make-grid(lg);
+}
+
