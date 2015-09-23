@@ -117,7 +117,7 @@ gulp.task('coffee', function() {
 
 gulp.task('clean-js', function() {
   gulp.src(getOutputDir()+ASSETS+'/js', { read: false })
-    .pipe(gulpif(env === PRODUCTION, vinylPaths(del)))
+    .pipe(gulpif(env === PRODUCTION, vinylPaths(del).on('error', gutil.log)))
 });
 gulp.task('vendor', function() {
   gulp.src(dependencies)
@@ -188,19 +188,19 @@ gulp.task('editorSass', function() {
 });
 gulp.task('clean-css', function() {
   gulp.src(getOutputDir()+ASSETS+'/css', { read: false })
-    .pipe(gulpif(env === PRODUCTION, vinylPaths(del)))
+    .pipe(gulpif(env === PRODUCTION, vinylPaths(del).on('error', gutil.log)))
 });
 gulp.task('images',['clean-images'], function() {
-  return gulp.src([MOCKUPS+'/{images,sprite}/**/*.{jpg,png,gif}'])
+  return gulp.src([MOCKUPS+'/{images,sprite}/**/*.{jpg,png,gif,svg}'])
     .pipe(duration('images'))
-    .pipe(flatten())
+    .pipe(flatten().on('error', gutil.log))
     .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, rev()))
-    .pipe(gulp.dest(getOutputDir()+ASSETS+'/images'))
+    .pipe(gulp.dest(getOutputDir()+ASSETS+'/images').on('error', gutil.log))
     .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, rev.manifest()))
     .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, gulp.dest(BUILD+'/rev/images')))
 });
 gulp.task('clean-images', function() {
-  gulp.src(getOutputDir()+ASSETS+'/images', { read: false })
+  gulp.src([getOutputDir()+ASSETS+'/images'])
     .pipe(gulpif(env === PRODUCTION, vinylPaths(del)))
 });
 gulp.task('fonts', function() {
