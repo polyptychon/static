@@ -241,7 +241,7 @@ gulp.task('build', function() {
 gulp.task('server', ['connect', 'watch']);
 gulp.task('production', function() {
   env = PRODUCTION;
-  runSequence(['images','clean-js'],['fonts','coffee','sass'],['jade']);
+  runSequence(['clean-images','images','clean-js'],['fonts','coffee','sass'],['jade']);
 });
 
 //gulp watch --jade=filename
