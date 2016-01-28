@@ -1,7 +1,7 @@
 {
   "name": "site_name",
   "version": "0.1.0",
-  "description": "kastoria.gr",
+  "description": "site_name.gr",
   "homepage": "https://github.com/polyptychon/site_name",
   "bugs": "",
   "main": "src/coffee/main.coffee",
