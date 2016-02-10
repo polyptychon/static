@@ -6,8 +6,8 @@
   "bugs": "",
   "main": "src/coffee/main.coffee",
   "author": {
-    "name": "Harris Sidiropoulos",
-    "email": "sidiropoulos@polyptychon.gr"
+    "name": "Polyptychon",
+    "email": "webadmin@polyptychon.gr"
   },
   "repository": {
     "type": "git",
@@ -44,7 +44,6 @@
     "gulp-sass": "^2.0.4",
     "gulp-size": "^1.0.0",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-strip-debug": "^1.1.0",
     "gulp-uglify": "~0.3.0",
     "gulp-util": "^3.0.0",
     "gulp-webserver": "^0.8.3",
@@ -63,6 +62,8 @@
   "dependencies": {
     "animationframe": "git://github.com/HarrisSidiropoulos/animationframe",
     "jquery": "^2.1.1",
+    "jquery-touch-events": "git+https://github.com/benmajor/jQuery-Touch-Events.git",
+    "jquery.browser": "^0.1.0",
     "jquery.transit": "^0.9.12",
     "photoswipe": "^4.0.7"
   },

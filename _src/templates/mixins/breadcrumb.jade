@@ -1,9 +1,9 @@
 mixin breadcrumb (options)
-  - options = options || {}
-  - currentClassName = options.currentClassName || 'current-cat'
-  - menuItems = options.menuItems || Array.isArray(options) ? options : []
-  - useLabel = options.useLabel==='true'
-  - activeIndex = options.activeIndex || menuItems.length-1
+  - var options = options || {};
+  - var currentClassName = options.currentClassName || 'current-cat';
+  - var menuItems = options.menuItems || Array.isArray(options) ? options : [];
+  - var useLabel = options.useLabel==='true';
+  - var activeIndex = options.activeIndex || menuItems.length-1;
   ol.breadcrumb(class=options.classes, id=options.id)
     if useLabel
       li.breadcrumb-label

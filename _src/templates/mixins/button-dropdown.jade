@@ -1,12 +1,12 @@
 mixin button-dropdown (options)
-  - options = options || {}
-  - label = options.label || 'Action'
-  - className = options.className || 'btn-default'
-  - menuItems = options.menuItems || []
+  - var options = options || {};
+  - var label = options.label || 'Action';
+  - var className = options.className || 'btn-default';
+  - var menuItems = options.menuItems || [];
 
-  .btn-group
+  .dropdown
     button.dropdown-toggle(type="button", class="btn #{className}", data-toggle="dropdown")= label
-      span.caret
+    span.caret
 
     ul.dropdown-menu(role="menu")
       each item in menuItems

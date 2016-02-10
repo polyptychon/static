@@ -2,13 +2,15 @@ mixin pagination(options)
   - options = options || {}
   - classes = options.classes || ''
   - items = options.items || 5
-  ul.pagination(class=options.classes)
-    li
-      a.previous(href="#")
-        span.glyphicon.previous-icon
-    - for (var i=0; i<options.items; i++)
+  ul.pagination.no-icons(class=classes)
+    //-
+      li
+        a.previous(href="#")
+          span.glyphicon.previous-icon
+    - for (var i=0; i<items; i++)
       li(class=i==0?"active":"")
         a(href='#')=i+1
-    li
-      a.next(href="#")
-        span.glyphicon.next-icon
+    //-
+      li
+        a.next(href="#")
+          span.glyphicon.next-icon

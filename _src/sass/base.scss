@@ -36,6 +36,12 @@ a {
   &.active {
     color: $link-active-color;
   }
+  &.more {
+    &:hover, &:focus {
+      color: $brand-primary;
+      text-decoration: none;
+    }
+  }
 }
 
 hr {

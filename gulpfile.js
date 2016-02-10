@@ -21,7 +21,6 @@ var gulp = require('gulp'),
     crypto = require('crypto'),
     _ = require('lodash'),
 
-    stripDebug = require('gulp-strip-debug'),
     del = require('del'),
     vinylPaths = require('vinyl-paths'),
 
@@ -203,10 +202,6 @@ gulp.task('images', function() {
     .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, gulp.dest(BUILD+'/rev/images')))
 });
 gulp.task('clean-images', function() {
-  //gulp.src([getOutputDir()+ASSETS+'/images'])
-  //  .pipe(stripDebug())
-  //  .pipe(gulpif(env === PRODUCTION, vinylPaths(del).on('error', gutil.log)));
-
   return new Promise(function (resolve, reject) {
     var vp = vinylPaths();
 
