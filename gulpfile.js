@@ -49,6 +49,30 @@ var DEVELOPMENT = 'development',
     watching = false,
     not_in_dependencies_libs = ['jquery', 'bootstrapify'];
 
+var acc = function (t) {
+  t = t.replace(/Ά/g, "Α");
+  t = t.replace(/ά/g, "α");
+  t = t.replace(/Έ/g, "Ε");
+  t = t.replace(/έ/g, "ε");
+  t = t.replace(/Ή/g, "Η");
+  t = t.replace(/ή/g, "η");
+  t = t.replace(/Ί/g, "Ι");
+  t = t.replace(/Ϊ/g, "Ι");
+  t = t.replace(/ί/g, "ι");
+  t = t.replace(/ϊ/g, "ι");
+  t = t.replace(/ΐ/g, "ι");
+  t = t.replace(/Ό/g, "Ο");
+  t = t.replace(/ό/g, "ο");
+  t = t.replace(/Ύ/g, "Υ");
+  t = t.replace(/Ϋ/g, "Υ");
+  t = t.replace(/ύ/g, "υ");
+  t = t.replace(/ϋ/g, "υ");
+  t = t.replace(/ΰ/g, "υ");
+  t = t.replace(/Ώ/g, "Ω");
+  t = t.replace(/ώ/g, "ω");
+  return t.toUpperCase();
+};
+
 var env = process.env.NODE_ENV || DEVELOPMENT;
 if (env!==DEVELOPMENT) env = PRODUCTION;
 
@@ -64,24 +88,31 @@ function getOutputDir() {
 }
 
 gulp.task('jade', function() {
+  var jsManifest      = env === PRODUCTION && USE_FINGERPRINTING ? (JSON.parse(fs.readFileSync("./"+BUILD+'/rev/js/rev-manifest.json', "utf8"))) : {},
+  //vendorManifest  = env === PRODUCTION ? (JSON.parse(fs.readFileSync("./"+BUILD+'/rev/js-vendor/rev-manifest.json', "utf8"))) : {},
+    cssManifest     = env === PRODUCTION && USE_FINGERPRINTING? (JSON.parse(fs.readFileSync("./"+BUILD+'/rev/css/rev-manifest.json', "utf8"))) : {},
+    jsonManifest  = env === PRODUCTION && USE_FINGERPRINTING ? (JSON.parse(fs.readFileSync("./"+BUILD+'/rev/json/rev-manifest.json', "utf8"))) : {},
+    imagesManifest  = env === PRODUCTION && USE_FINGERPRINTING ? (JSON.parse(fs.readFileSync("./"+BUILD+'/rev/images/rev-manifest.json', "utf8"))) : {},
+    soundsManifest  = env === PRODUCTION && USE_FINGERPRINTING ? (JSON.parse(fs.readFileSync("./"+BUILD+'/rev/sounds/rev-manifest.json', "utf8"))) : {};
+
   var config = {
     "production": env === PRODUCTION,
     "pretty": env === DEVELOPMENT,
-    "locals": {}
+    "locals": {
+      'acc': acc,
+      'data': ""
+    }
   };
 
-  var jsManifest      = env === PRODUCTION && USE_FINGERPRINTING ? (JSON.parse(fs.readFileSync("./"+BUILD+'/rev/js/rev-manifest.json', "utf8"))) : {},
-      //vendorManifest  = env === PRODUCTION ? (JSON.parse(fs.readFileSync("./"+BUILD+'/rev/js-vendor/rev-manifest.json', "utf8"))) : {},
-      cssManifest     = env === PRODUCTION && USE_FINGERPRINTING? (JSON.parse(fs.readFileSync("./"+BUILD+'/rev/css/rev-manifest.json', "utf8"))) : {},
-      imagesManifest  = env === PRODUCTION && USE_FINGERPRINTING ? (JSON.parse(fs.readFileSync("./"+BUILD+'/rev/images/rev-manifest.json', "utf8"))) : {};
-
-  gulp.src(SRC+"/templates/"+jadeFiles+".jade")
+  return gulp.src(SRC+"/templates/"+jadeFiles+".jade")
     .pipe(duration('jade'))
     .pipe(jade(config).on('error', gutil.log))
     .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, fingerprint(jsManifest, { base:'assets/js/', prefix: 'assets/js/' })))
     //.pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, fingerprint(vendorManifest, { base:'assets/js/', prefix: 'assets/js/' })))
+    .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, fingerprint(jsonManifest, { mode:"replace", base:'assets/json/', prefix: 'assets/json/' })))
+    .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, fingerprint(soundsManifest, { mode:"replace", base:'assets/sounds/', prefix: 'assets/sounds/' })))
     .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, fingerprint(cssManifest, { base:'assets/css/', prefix: 'assets/css/' })))
-    .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, fingerprint(imagesManifest, { base:'assets/images/', prefix: 'assets/images/' })))
+    .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, fingerprint(imagesManifest, { mode:"replace", base:'assets/images/', prefix: 'assets/images/' })))
     .pipe(gulpif(env === PRODUCTION, size()))
     .pipe(gulp.dest(getOutputDir())).on('end', function() {
       if (watching) livereload.changed('');
@@ -108,6 +139,8 @@ gulp.task('coffee', function() {
       .pipe(gulp.dest(getOutputDir()+ASSETS+'/js'))
       .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, rev.manifest()))
       .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, gulp.dest(BUILD+'/rev/js')))
+      .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, rev.manifest()))
+      .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, gulp.dest(BUILD+'/rev/js')))
   }
 
   gulp.src('./'+SRC+'/coffee/main.coffee')
@@ -116,11 +149,11 @@ gulp.task('coffee', function() {
 });
 
 gulp.task('clean-js', function() {
-  gulp.src(getOutputDir()+ASSETS+'/js', { read: false })
+  return gulp.src(getOutputDir()+ASSETS+'/js', { read: false })
     .pipe(gulpif(env === PRODUCTION, vinylPaths(del).on('error', gutil.log)))
 });
 gulp.task('vendor', function() {
-  gulp.src(dependencies)
+  return gulp.src(dependencies)
     .pipe(gulpif(env === DEVELOPMENT, sourcemaps.init()))
     .pipe(concat('vendor.js'))
     .pipe(gulpif(env === DEVELOPMENT, sourcemaps.write()))
@@ -189,7 +222,7 @@ gulp.task('editorSass', function() {
     .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, gulp.dest(BUILD+'/rev/css')))
 });
 gulp.task('clean-css', function() {
-  gulp.src(getOutputDir()+ASSETS+'/css', { read: false })
+  return gulp.src(getOutputDir()+ASSETS+'/css', { read: false })
     .pipe(gulpif(env === PRODUCTION, vinylPaths(del).on('error', gutil.log)))
 });
 gulp.task('images', function() {
@@ -213,6 +246,47 @@ gulp.task('clean-images', function() {
       });
   });
 });
+
+gulp.task('json', function() {
+  var imagesManifest  = env === PRODUCTION && USE_FINGERPRINTING ? (JSON.parse(fs.readFileSync("./"+BUILD+'/rev/images/rev-manifest.json', "utf8"))) : {},
+      soundsManifest = env === PRODUCTION && USE_FINGERPRINTING ? (JSON.parse(fs.readFileSync("./"+BUILD+'/rev/sounds/rev-manifest.json', "utf8"))) : {};;
+  return gulp.src([SRC+'/json/*.json'])
+    .pipe(duration('json'))
+    .pipe(gulpif( env === PRODUCTION && USE_FINGERPRINTING, fingerprint(imagesManifest, { mode:'replace' }) ))
+    .pipe(gulpif( env === PRODUCTION && USE_FINGERPRINTING, fingerprint(soundsManifest, { mode:'replace' }) ))
+    .pipe(flatten().on('error', gutil.log))
+    .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, rev()))
+    .pipe(gulp.dest(getOutputDir()+ASSETS+'/json').on('error', gutil.log))
+    .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, rev.manifest()))
+    .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, gulp.dest(BUILD+'/rev/json')))
+});
+gulp.task('clean-json', function() {
+  return gulp.src(getOutputDir()+ASSETS+'/json', { read: false })
+    .pipe(gulpif(env === PRODUCTION, vinylPaths(del).on('error', gutil.log)))
+});
+
+gulp.task('sounds', function() {
+  return gulp.src([MOCKUPS+'/sounds/*.mp3'])
+    .pipe(duration('sounds'))
+    .pipe(flatten().on('error', gutil.log))
+    .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, rev()))
+    .pipe(gulp.dest(getOutputDir()+ASSETS+'/sounds').on('error', gutil.log))
+    .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, rev.manifest()))
+    .pipe(gulpif(env === PRODUCTION && USE_FINGERPRINTING, gulp.dest(BUILD+'/rev/sounds')))
+});
+gulp.task('clean-sounds', function() {
+  return new Promise(function (resolve, reject) {
+    var vp = vinylPaths();
+
+    gulp.src(getOutputDir()+ASSETS+'/sounds')
+      .pipe(vp)
+      .pipe(gulp.dest('dist'))
+      .on('end', function () {
+        del(vp.paths).then(resolve).catch(reject);
+      });
+  });
+});
+
 gulp.task('fonts', function() {
   return gulp.src(['node_modules/bootstrap/assets/fonts/**', MOCKUPS+"/fonts/*"])
     .pipe(gulp.dest(getOutputDir()+ASSETS+'/fonts'))
@@ -221,8 +295,9 @@ gulp.task('fonts', function() {
 gulp.task('watch', function() {
   watching = true;
   livereload.listen();
-  gulp.watch(SRC+'/**/*.jade', ['jade']).on('error', gutil.log);
-  gulp.watch(SRC+'/**/*.{js,coffee}', ['coffee']).on('error', gutil.log);
+  gulp.watch(SRC+'/json/*.json', ['json']).on('error', gutil.log);
+  gulp.watch(SRC+'/**/*.{jade,json}', ['jade']).on('error', gutil.log);
+  gulp.watch(SRC+'/**/*.{js,coffee,json}', ['coffee']).on('error', gutil.log);
   gulp.watch(SRC+'/**/*.scss', ['sass']).on('error', gutil.log);
   gulp.watch(BUILD+env+'/assets/**').on('change', function(file) {
     console.log(file.path);
@@ -241,17 +316,19 @@ gulp.task('connect', function() {
     }));
 });
 
-gulp.task('default', ['coffee', 'sass', 'jade']);
-gulp.task('live', ['coffee', 'jade', 'sass', 'watch']);
+gulp.task('clean', ['clean-json','clean-images','clean-sounds','clean-css', 'clean-js']);
+gulp.task('assets', ['images','sounds','json','fonts']);
+gulp.task('default', ['json', 'coffee', 'sass', 'jade']);
+gulp.task('live', ['json', 'coffee', 'jade', 'sass', 'watch']);
 gulp.task('editor', ['editorSass']);
 
 gulp.task('build', function() {
-  runSequence(['fonts','images','spriteSass','autoVariables'],['fonts','coffee','sass'],['jade']);
+  runSequence(['clean-images'],['fonts','images','sounds','spriteSass','autoVariables'],['json', 'fonts','coffee','sass'],['jade']);
 });
 gulp.task('server', ['connect', 'watch']);
 gulp.task('production', function() {
   env = PRODUCTION;
-  runSequence(['clean-images','clean-js'],['images'],['fonts','coffee','sass'],['jade']);
+  runSequence(['clean-json','clean-images','clean-sounds','clean-css', 'clean-js'],['images','sounds','json','fonts'],['coffee','sass'],['jade']);
 });
 
 //gulp watch --jade=filename
