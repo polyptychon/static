@@ -1,5 +1,6 @@
 @import "sprites";
-
+$spriteWidth: 1024px !default;
+$spriteHeight: 768px !default;
 $hover-icons: facebook twitter pinterst google-plus youtube vimeo;
 
 @each $hover-icon in $hover-icons {
