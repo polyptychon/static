@@ -1,0 +1,15 @@
+.sidebar-menu {
+  &, & ul {
+    @extend .list-unstyled;
+    @extend .text-uppercase;
+  }
+  a {
+    @extend .side_menu;
+  }
+  li.active, li.is-active a, li a.active, li.current-cat > a, li.current_page_item > a {
+    font-weight: bold;
+  }
+  & ul {
+    margin-left: 15px;
+  }
+}

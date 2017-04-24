@@ -1,8 +1,11 @@
 .breadcrumb {
   background: none;
   padding: 0;
+  a {
+    @extend .text-uppercase;
+  }
   .current, .current-cat, .current > a, .current-cat > a {
-
     color: $text-color;
+    text-decoration: none;
   }
 }

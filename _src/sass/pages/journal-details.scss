@@ -1,0 +1,41 @@
+.back-to-list-container {
+  margin-bottom: 50px;
+  @media(max-width: $screen-sm) {
+    margin-bottom: 0;
+  }
+}
+.btn-back {
+  @extend .back_button;
+  @extend .text-uppercase;
+  border: none;
+  padding: 15px 10px;
+  margin-left: -10px;
+  &:hover {
+    background: none;
+  }
+}
+
+.journal-details {
+  text-align: center;
+  margin-bottom: 100px;
+  .date {
+    @extend .text-uppercase;
+  }
+  &.no-image {
+    margin-top: -50px;
+    @media (max-width: $screen-xs-max) {
+      margin-top: -20px;
+    }
+  }
+}
+.journal-fold-image {
+  height: 350px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+  @media(max-width: $screen-sm) {
+    height: 250px;
+  }
+}

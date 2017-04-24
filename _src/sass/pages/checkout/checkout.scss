@@ -1,0 +1,44 @@
+.checkout-tab {
+  border: 1px solid $gray-light;
+  padding: 50px 30px;
+  margin: 50px 0;
+}
+.select2-container .select2-choice {
+  border: none;
+  padding-left: 0;
+  background: transparent;
+}
+.select2-container.select2-container-disabled .select2-choice,
+.select2-container.select2-container-disabled .select2-choice .select2-arrow {
+  border: none;
+  background: transparent;
+  padding-left: 0;
+}
+.select2-drop-active {
+  border-color: $gray-light;
+}
+.select2-search input {
+  background: none;
+}
+.woocommerce form .form-row label {
+  line-height: 1.4;
+}
+.woocommerce form.checkout_coupon, .woocommerce form.login, .woocommerce form.register {
+  border-radius: 0;
+  @extend .form-checkout;
+  input[type="text"], input[type="password"] {
+    @extend .form-control;
+  }
+  .button {
+    border-radius: 0;
+    color: #fff;
+    background-color: #333;
+    border-color: #262626;
+    padding: 11px 30px;
+    font-weight: normal;
+    margin-right: 15px;
+  }
+}
+.checkout {
+  padding-top: 5px;
+}

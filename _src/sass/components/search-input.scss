@@ -1,0 +1,22 @@
+.search-input {
+  border: 1px solid $gray-light;
+  box-shadow: none;
+  padding: 6px 15px 6px 35px;
+  background: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='40' height='24' viewBox='0 0 24 24'><path style='fill:#696969;' d='M17.514,15.952l-5.486-5.486c0.743-1.059,1.149-2.315,1.149-3.635c0-1.695-0.66-3.289-1.859-4.487c-1.199-1.199-2.792-1.859-4.488-1.859c-1.695,0-3.289,0.66-4.488,1.859c-2.474,2.475-2.474,6.5,0,8.976c1.199,1.198,2.792,1.858,4.487,1.858c1.32,0,2.576-0.405,3.635-1.148l5.486,5.486L17.514,15.952zM6.829,11.116c-1.145,0-2.221-0.445-3.03-1.254c-1.671-1.671-1.671-4.39,0-6.06c0.809-0.81,1.885-1.255,3.03-1.255S9.05,2.992,9.86,3.801c0.809,0.809,1.255,1.885,1.255,3.03s-0.446,2.221-1.25,3.03C9.05,10.671,7.974,11.116,6.829,11.116z'/></svg>");
+  background-position: 0 62%;
+  background-repeat: no-repeat;
+}
+.search-input-group {
+  .glyphicon-search {
+    position: absolute;
+    left: 10px;
+    z-index: 100;
+    top: 50%;
+    margin-top: -7px;
+  }
+  .search-input {
+    width: 100%;
+    background: none;
+    padding: 6px 15px 6px 35px;
+  }
+}

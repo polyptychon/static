@@ -1,0 +1,54 @@
+.form-control.form-control-lg {
+  width: 100%;
+  height: 45px;
+}
+input.form-control.form-control-lg {
+  padding: 6px 15px;
+  height: 45px;
+}
+.form-group {
+  margin-bottom: 25px;
+  label {
+    @extend .text-uppercase;
+  }
+}
+.btn-large {
+  padding: 11px 30px;
+  @extend .text-uppercase;
+}
+fieldset {
+  margin-top: -20px;
+}
+input, select, textarea, button {
+  box-shadow: none !important;
+  &.form-control:focus, &:focus + .check:before {
+    box-shadow: none !important;
+  }
+}
+label {
+  .small {
+    text-transform: none;
+  }
+}
+.help-block {
+  &, & > ul > li {
+    @extend .small;
+    color: inherit;
+  }
+  &.with-errors {
+    margin-bottom: -20px;
+    display: none;
+  }
+}
+.has-error {
+  .help-block.with-errors {
+    display: inline-block;
+  }
+}
+
+[disabled]:-webkit-autofill,
+[disabled]:-webkit-autofill:hover,
+[disabled]:-webkit-autofill:focus {
+  background: $input-bg-disabled !important;
+  box-shadow: 0 0 0px 1000px $input-bg-disabled inset !important;
+}

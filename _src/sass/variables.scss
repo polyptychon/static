@@ -1,6 +1,8 @@
-$font-primary: "Open Sans", Arial, 'sans-serif';
-$font-secondary: Georgia, serif;
+$font-primary: "ProximaNova", Arial, 'sans-serif';
+$font-primary-bold: "ProximaNova", Arial, 'sans-serif';
+$font-secondary: $font-primary;
 $border-radius-base: 0;
+$header-height: 81px;
 
 $input-border-focus: $brand-primary;
 //select2
@@ -9,3 +11,7 @@ $container-focus-border-color: $brand-primary;
 $focus-border-color: $brand-primary;
 
 $state-success-text: $brand-primary;
+
+// $screen-lg: 1400px !default;
+// $grid-gutter-width: 30px !default;
+// $container-large-desktop: (1370px + $grid-gutter-width) !default;

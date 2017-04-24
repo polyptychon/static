@@ -1,0 +1,24 @@
+.share-list-container {
+  margin-top: 20px;
+  & > span {
+    @extend .text-uppercase;
+    @extend .h4;
+  }
+}
+.share-list-top {
+  .share-list-container > span {
+    display: block;
+  }
+}
+.share-list {
+  @extend .list-unstyled;
+  display: inline;
+  li {
+    display: inline-block;
+    padding: 0 7px;
+    .glyphicon {
+      display: inline-block;
+      margin-bottom: -5px !important;
+    }
+  }
+}

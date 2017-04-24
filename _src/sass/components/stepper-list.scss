@@ -1,0 +1,92 @@
+.stepper-list {
+  @extend .list-unstyled;
+  @extend .list-inline;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  li {
+    display: flex;
+    align-items: center;
+    $radious: 28px;
+    min-width: $radious + 5px;
+    @media(min-width: $screen-xs-max) {
+      min-width: 120px;
+    }
+    a {
+      position: relative;
+      display: flex;
+      align-items: center;
+      &:hover, &:focus, &:active {
+        color: $gray;
+        text-decoration: none;
+        .indicator {
+          background: $gray;
+        }
+      }
+      .indicator {
+        position: relative;
+        display: flex;
+        order: 2;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+        min-width: $radious;
+        min-height: $radious;
+        background: $gray-light;
+        border-radius: $radious / 2;
+        margin-top: -2px;
+        white-space: nowrap;
+      }
+      .title {
+        position: relative;
+        @extend .text-uppercase;
+        display: flex;
+        flex-flow: column nowrap;
+        order: 3;
+        max-width: 140px;
+        margin-left: 5px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        @media(max-width: $screen-xs) {
+          display: none;
+        }
+      }
+    }
+    &:after{
+      content: '';
+      position: relative;
+      display: flex;
+      order: 3;
+      left: 30px;
+      top: 0;
+      width: 320px;
+      margin-left: -12px;
+      height: 1px;
+      background-color: $gray-light;
+      @media(max-width: $screen-md) {
+        width: 120px;
+      }
+      @media(max-width: $screen-xs) {
+        width: 140px;
+        left: 15px;
+      }
+    }
+    &:last-child {
+      &:after {
+        display: none;
+      }
+    }
+    &.enabled .indicator {
+      // background: $brand-success;
+      background: rgba($gray, .8);
+    }
+    &.active .indicator, &.active a:active .indicator, &.active a:focus .indicator {
+      background: $gray-dark;
+    }
+    &.error .indicator {
+      background: $brand-danger;
+    }
+  }
+}

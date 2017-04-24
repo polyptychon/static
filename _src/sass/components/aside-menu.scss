@@ -41,7 +41,7 @@ aside, .sidebar {
         & a:visited, & a:focus {
           text-decoration: none;
         }
-        &.active a,  &.current_page_item a,& a:hover {
+        &.active a,  &.current_page_item a, &.current-cat a, & a:hover {
 
           background: $gray-darker;
           color: white;

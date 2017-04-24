@@ -1,0 +1,80 @@
+.collection-item-images {
+  @extend .row;
+}
+.collection-item-image {
+  @extend .col-md-6;
+  @extend .col-xs-12;
+  margin-bottom: 30px;
+  &.landscape {
+    @extend .col-xs-12;
+    clear: both;
+  }
+}
+
+.collection-item-details {
+  h1 {
+    @extend .text-uppercase;
+    margin: 0 auto;
+  }
+  .serial-number {
+    @extend .small;
+  }
+  .item-price, .price {
+    @extend .price_large;
+    margin-top: 15px;
+  }
+  .price, h1, .serial-number, .item-price {
+    text-align: center;
+  }
+  form {
+    margin: 40px 0 30px;
+  }
+  p {
+    @extend .small;
+  }
+  @media(max-width: $screen-sm-max) {
+    .price, h1, .serial-number, .item-price {
+      text-align: left;
+    }
+  }
+  .shop_attributes {
+    width: 100%;
+    p {
+      margin: 0;
+    }
+  }
+  .out-of-stock {
+    @extend .col-md-12;
+  }
+}
+.commentlist {
+  padding-left: 15px;
+}
+.collection-item-details form.comment-form {
+  margin-top: 5px;
+  input[type='submit'] {
+    @extend .btn;
+    @extend .btn-primary;
+  }
+}
+.popover-content {
+  .single_add_to_cart_button {
+    font-size: 12px;
+      padding: 8px 30px;
+  }
+  form.variations_form {
+    margin: 0;
+  }
+  .attribute-input-width, .quantity-input-width {
+    width: 100%;
+    .form-group {
+      margin-bottom: 10px;
+      label, select, input {
+        font-size: 12px;
+      }
+      select, input {
+        height: 35px;
+      }
+    }
+  }
+}

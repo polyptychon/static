@@ -1,27 +1,8 @@
 @import "sprites";
 $spriteWidth: 1024px !default;
 $spriteHeight: 768px !default;
-$hover-icons: facebook twitter pinterst google-plus youtube vimeo;
 
-@each $hover-icon in $hover-icons {
-  @media (-webkit-min-device-pixel-ratio: 1.1), (min-device-pixel-ratio: 1.1),  (min-resolution: 105dpi), (min-resolution: 1.1dppx) {
-    .#{$hover-icon}-icon {
-      background-image: url($pathToSpriteSVG);
-      background-size: $spriteWidth $spriteHeight;
-    }
-  }
-  .#{$hover-icon}-icon {
-    @extend .sprite_#{$hover-icon} !optional;
-    &:hover {
-      @extend .sprite_#{$hover-icon}-hover !optional;
-    }
-  }
-  a:hover .#{$hover-icon}-icon, a:focus .#{$hover-icon}-icon {
-    @extend .sprite_#{$hover-icon}-hover !optional;
-  }
-}
-
-$simple-icons: address logo phone fax email;
+$simple-icons: email cell-phone linkedin;
 
 @each $simple-icon in $simple-icons {
   @media (-webkit-min-device-pixel-ratio: 1.1), (min-device-pixel-ratio: 1.1),  (min-resolution: 105dpi), (min-resolution: 1.1dppx) {
@@ -32,7 +13,11 @@ $simple-icons: address logo phone fax email;
   }
   .#{$simple-icon}-icon {
     @extend .sprite_#{$simple-icon} !optional;
-    margin-bottom: -1px;
+    margin-bottom: -5px;
     margin-right: 5px;
   }
+}
+
+.cancel-icon {
+  margin-bottom: -2px;
 }

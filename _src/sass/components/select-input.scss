@@ -1,0 +1,26 @@
+.select-label {
+  @extend .text-uppercase;
+  @extend .dropdown_menu_text !optional;
+}
+select.form-control {
+  @extend .text-uppercase;
+  @extend .dropdown_menu_text !optional;
+  color: $input-color;
+  margin: 0;
+  padding: 6px 45px 6px 15px;
+  border: 1px solid $gray-light;
+  box-shadow: none;
+  height: 45px;
+  width: auto;
+  min-width: 75px;
+  border-radius: 0 !important;
+  display: inline-block;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  -moz-appearance: none;
+  text-indent: 0.01px;
+  text-overflow: '';
+  background: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='40' height='24' viewBox='0 0 24 24'><path fill='#{$input-color}' d='M7.406 7.828l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z'></path></svg>");
+  background-position: 100% 50%;
+  background-repeat: no-repeat;
+}

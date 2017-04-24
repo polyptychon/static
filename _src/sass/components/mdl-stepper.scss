@@ -1,0 +1,29 @@
+.mdl-step__title-text, .mdl-step, .mdl-step__label, .mdl-step__title, .mdl-step__label-indicator, .mdl-step__label-indicator-content {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  letter-spacing: normal;
+  line-height: normal;
+  font-family: $font-primary;
+}
+.mdl-stepper--horizontal .mdl-step__label > .mdl-step__title > * {
+  max-width: 150px;
+}
+.mdl-stepper, .mdl-stepper:before {
+  box-shadow: none;
+}
+.mdl-stepper {
+  margin-top: 20px;
+  max-width: 100%;
+  height: auto;
+  // min-height: 1200px;
+}
+.mdl-step {
+  height: auto;
+}
+.mdl-stepper-container {
+  margin: 0 -15px 0 -24px;
+}
+.mdl-stepper--horizontal .mdl-step > .mdl-step__content {
+  height: auto;
+}

@@ -1,10 +1,10 @@
-global.$ = global.jQuery = $ = require "jquery"
-
-require "bootstrap/assets/javascripts/bootstrap/transition"
-require "bootstrap/assets/javascripts/bootstrap/affix"
-require "bootstrap/assets/javascripts/bootstrap/tab"
-require "bootstrap/assets/javascripts/bootstrap/dropdown"
-require "bootstrap/assets/javascripts/bootstrap/collapse"
-
-if ($('form.sent').length>0)
-  $('.screen-reader-response').addClass('alert-success')
+# global.$ = global.jQuery = $ = require "jquery"
+#
+# require "bootstrap-sass/assets/javascripts/bootstrap/transition"
+# require "bootstrap-sass/assets/javascripts/bootstrap/tab"
+# require "bootstrap-sass/assets/javascripts/bootstrap/dropdown"
+# require "bootstrap-sass/assets/javascripts/bootstrap/collapse"
+# require "bootstrap-sass/assets/javascripts/bootstrap/modal"
+# require "bootstrap-sass/assets/javascripts/bootstrap/tooltip"
+# require "bootstrap-sass/assets/javascripts/bootstrap/popover"
+# require "bootstrap-validator"

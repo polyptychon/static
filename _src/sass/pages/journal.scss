@@ -1,0 +1,44 @@
+.journal-list {
+  margin: 50px 0;
+}
+.journal-list-item {
+  height: 450px;
+  border: 1px solid $gray-light;
+  padding: 15px;
+  margin-bottom: 30px;
+  position: relative;
+  @extend .text-centered;
+}
+.journal-list-item-image {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+}
+.journal-list-item-details {
+  h3 {
+    height: 3em;
+  }
+  .date {
+    @extend .text-uppercase;
+  }
+  .details {
+    height: 6em;
+  }
+}
+.journal-list-item-links {
+  text-align: center;
+  width: calc(100% - 30px);
+  position: absolute;
+  bottom: 0;
+  .btn-default {
+    display: inline-block;
+    border: none;
+    margin-bottom: 10px;
+    &:hover, &:focus, &:active {
+      background: none;
+      text-decoration: underline;
+    }
+  }
+}

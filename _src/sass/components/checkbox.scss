@@ -1,0 +1,77 @@
+@import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_forms";
+.checkbox {
+  position: relative;
+  margin: 0 30px;
+  &.checkbox-inline {
+    display: inline-block;
+    padding: 0;
+  }
+  label {
+    display: inline;
+    padding-left: 0;
+  }
+  .check {
+    &:before {
+      content: '';
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      position: absolute;
+      z-index: 1;
+      top: 2px;
+      left: -30px;
+      background: white;
+      border: 1px solid $gray-light;
+      border-radius: 0;
+    }
+    &:after {
+      content: '';
+      width: 9px;
+      height: 5px;
+      position: absolute;
+      z-index: 12;
+      top: 8px;
+      left: -24px;
+      border: 1px solid $gray-darker;
+      border-top: none;
+      border-right: none;
+      background: transparent;
+      opacity: 0;
+      transform: rotate(-45deg);
+    }
+  }
+  &.checkbox-inline {
+    .check {
+      &:before {
+        top: 2px;
+      }
+      &:after {
+        top: 8px;
+      }
+    }
+  }
+  input[type=checkbox] {
+    // visibility: hidden;
+    position: absolute;
+    left: -5px;
+    top: -1px;
+    z-index: 0;
+    &:checked + .check:after {
+      opacity: 1 !important;
+    }
+    &:focus + .check:before {
+      $color-rgba: rgba(red($input-border-focus), green($input-border-focus), blue($input-border-focus), .6);
+      border-color: $input-border-focus;
+      outline: 0;
+      @include box-shadow(inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px $color-rgba);
+    }
+  }
+}
+.checkbox.disabled, fieldset[disabled] .checkbox {
+  .check:before {
+    background-color: $input-bg-disabled;
+    opacity: 1;
+    cursor: $cursor-disabled;
+    pointer-events: none;
+  }
+}

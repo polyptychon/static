@@ -1,0 +1,34 @@
+.form-checkout {
+  text-align: left;
+  .form-group {
+    @extend .row;
+    margin: 20px 0;
+  }
+  label {
+    @media(min-width: $screen-sm-max) {
+      display: flex;
+      align-items: center;
+      height: 35px;
+    }
+    padding: 0 10px 0 0;
+    font-size: 13px;
+    line-height: 1.4em;
+    font-weight: normal;
+  }
+  .input-group {
+    padding: 0;
+  }
+  select.form-control {
+    height: 35px;
+  }
+  .checkbox {
+    label {
+      text-transform: none;
+      height: auto !important;
+      display: inline;
+    }
+    input {
+      margin-top: 6px;
+    }
+  }
+}

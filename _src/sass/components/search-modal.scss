@@ -1,0 +1,34 @@
+#searchModal {
+  top: 125px;
+  .modal-content {
+    border: none;
+    border-radius: 0;
+  }
+  .input-group-addon {
+    border: 1px solid $gray-light;
+    border-right: none;
+    box-shadow: none;
+    background-color: white;
+  }
+  .input-group {
+    width: 100%;
+  }
+  .search-input {
+    width: 100%;
+    padding: 6px 15px 6px 35px;
+    background: none;
+  }
+  input, button, .input-group-addon {
+    border-radius: 0;
+    &:focus {
+      border-color: $gray-light;
+    }
+  }
+  .glyphicon-search {
+    position: absolute;
+    left: 10px;
+    z-index: 100;
+    top: 50%;
+    margin-top: -7px;
+  }
+}
